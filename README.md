@@ -75,3 +75,52 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+## Usage
+
+### Extract audio features
+
+```bash
+python -m src.extract_features \
+  --input_dir audio_samples \
+  --out_csv outputs/features/features.csv
+```
+
+This command extracts audio features from all audio files and saves them to a CSV file.
+
+## Visualize features for a single audio file
+
+```bash
+python -m src.visualize --file audio_samples/speech/example.wav
+```
+
+Generated plots:
+
+- waveform
+
+- Mel-spectrogram
+
+- MFCC
+
+- chroma
+
+Plots are saved to `outputs/plots/`.
+
+## Compare features across sound classes
+
+```bash
+python -m src.compare_features --csv outputs/features/features.csv
+```
+
+This command generates boxplots comparing selected audio features
+between speech, music, and noise.
+
+## Example Outputs
+
+- `features.csv` — extracted numerical audio features
+
+- `waveform.png` — time-domain waveform
+
+- `mel_spectrogram.png` — time–frequency representation
+
+- `compare_centroid_mean.png` — feature comparison across classes
