@@ -8,28 +8,21 @@ from src.utils import list_audio_files, ensure_dir
 def extract_features(file_path: str, sr: int = 22050, n_mfcc: int = 13):
     y, sr = librosa.load(file_path, sr=sr, mono=True)
 
-    # Basic energy / duration
     duration = librosa.get_duration(y=y, sr=sr)
     rms = librosa.feature.rms(y=y)[0]
 
-    # Time-domain
     zcr = librosa.feature.zero_crossing_rate(y)[0]
 
-    # Spectral
     centroid = librosa.feature.spectral_centroid(y=y, sr=sr)[0]
     rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)[0]
 
-    # MFCC
     mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)  # (n_mfcc, T)
 
-    # Mel-spectrogram (use log scale)
     mel = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=64)
     mel_db = librosa.power_to_db(mel, ref=np.max)
 
-    # Chroma
     chroma = librosa.feature.chroma_stft(y=y, sr=sr)
 
-    # Aggregate to fixed-size stats (mean/std over time)
     feats = {
         "duration_sec": float(duration),
 
