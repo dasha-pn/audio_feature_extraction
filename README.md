@@ -31,4 +31,47 @@ their acoustic features.
 
 ---
 
-## Project Structure
+## Extracted Audio Features
+
+### Time-domain features
+- Signal duration
+- Root Mean Square (RMS) energy
+- Zero-Crossing Rate (ZCR)
+
+### Spectral features
+- Spectral centroid
+- Spectral roll-off
+
+### Perceptual features
+- Mel-spectrogram (log-scaled)
+- Mel-Frequency Cepstral Coefficients (MFCCs)
+- Chroma features
+
+Frame-level features are aggregated into fixed-length representations
+using **mean and standard deviation**.
+
+---
+
+## Dataset
+
+Audio samples are organized manually into three folders:
+- `audio_samples/speech/`
+- `audio_samples/music/`
+- `audio_samples/noise/`
+
+Each audio file is a short clip (10–30 seconds) in `wav` or `mp3` format.
+
+Audio samples were taken from **publicly available datasets**
+(e.g. LibriSpeech, MUSAN, GTZAN, FreeSound) and are used for feature analysis only.
+
+---
+
+## Installation
+
+Create and activate a virtual environment, then install dependencies:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
